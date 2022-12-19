@@ -24,8 +24,7 @@ required to **provide instructions** of how to correct
 the original summary if they think it is not factually
 consistent. To enforce uniformity and reduce the
 noise in the instructions, we provide six templates
-for the annotators corresponding to different op-
-erations: *Remove*, *Add*, *Replace*, *Modify*, *Rewrite*,
+for the annotators corresponding to different operations: *Remove*, *Add*, *Replace*, *Modify*, *Rewrite*,
 and *Others*. The annotators need to fill in the tem-
 plates to generate the instructions.
 6. **Correct summary**: Following the instruction
