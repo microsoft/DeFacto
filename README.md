@@ -1,14 +1,71 @@
-# Project
+# DeFacto
 
-> This repo has been populated by an initial template to help get you started. Please
-> make sure to update the content to build a great experience for community-building.
+## Introduction
 
-As the maintainer of this project, please make a few updates:
+DeFacto is a dataset contating human demonstrations and feedback for improving factual consistency of text summarization.
 
-- Improving this README.MD file to provide a great experience
-- Updating SUPPORT.MD with content about this project's support experience
-- Understanding the security reporting process in SECURITY.MD
-- Remove this section from the README
+The dataset is constructed with the following steps:
+
+1. **Detect errors**: The annotator is required to
+evaluate a summary given the source document and
+**decide if the summary is factually consistent**.
+2. **Categorize errors**: If the annotator decides
+the summary *is not* factually consistent, they are
+required to **categorize the factual errors** in the
+summary as either *intrinsic* or *extrinsic*.
+3. **Give explanation**: The annotator is required to
+**provide a natural language explanation** on why
+the summary is factually consistent or not.
+4. **Provide evidence**: The annotator is required to
+*select a sentence from the source document as
+evidence* to support their claims described in 3.
+5. **Write corrective instruction**: The annotator is
+required to **provide instructions** of how to correct
+the original summary if they think it is not factually
+consistent. To enforce uniformity and reduce the
+noise in the instructions, we provide six templates
+for the annotators corresponding to different op-
+erations: *Remove*, *Add*, *Replace*, *Modify*, *Rewrite*,
+and *Others*. The annotators need to fill in the tem-
+plates to generate the instructions.
+6. **Correct summary**: Following the instruction
+in 5., the annotator is required to **edit the initial
+summary** to make it *factually consistent* with minimal, necessary modifications.
+
+We use [XSum](https://github.com/EdinburghNLP/XSum) as the target dataset and [Pegasus](https://github.com/google-research/pegasus) as the pre-trained summarization model to generate the initial system outputs.
+
+The dataset statistics are summarized below.
+
+| | Train | Val | Test | All |
+| --- | --- | --- | --- | --- |
+| All |  1000 | 486 | 1075 | 2561 |
+| w/ Errors | 701 | 341 | 779 | 1821 |
+
+## Using DeFacto
+
+We provide the data files in **`./data`** and a simple data loader **``data_loader.py``**.
+
+Each line of the data files contain a data example stored in the Json format, with the following strucure:
+
+```
+ {
+  "article": "input article",
+  "abstract": "abstract/reference summary",
+  "candidate": "candidate/initial system output",
+  "doc_id": int,
+  "has_error": true/false
+  "intrinsic_error": true/false,
+  "extrinsic_error": true/false,
+  "feedback": {
+    "summary": "human-corrected summary",
+    "evidence": "selected sentence from the input article",
+    "explanation": "natural language explanation",
+    "instruction": "concatenated instructions",
+    "instruction_list": ["list of instructions", ],
+  },
+}
+```
+
 
 ## Contributing
 
