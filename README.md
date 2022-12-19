@@ -2,7 +2,7 @@
 
 ## Introduction
 
-DeFacto is a dataset contating human demonstrations and feedback for improving factual consistency of text summarization.
+DeFacto is a dataset containing human demonstrations and feedback for improving factual consistency of text summarization.
 
 The dataset is constructed with the following steps:
 
